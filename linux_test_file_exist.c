@@ -80,7 +80,18 @@ int IsFileExist(const char *pathname)
 ************************************************************************/
 int IsPathExist(const char *pathname)
 {
-	return (NULL != opendir(pathname));
+	DIR *dir = NULL;
+	
+	dir = opendir(pathname);
+	if(NULL == dir)
+	{
+		return 0;
+	}
+	else
+	{
+		closedir(dir);
+		return 1;
+	}
 }
 
 /************************************************************************
