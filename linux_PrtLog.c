@@ -8,16 +8,21 @@
 *
 *********************************************************************/
 
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
 #include <stdarg.h>
-//#include <unistd.h>
 
 
 // __VA_ARGS__用可变参数宏(variadic macros)传递可变参数表
-#define DbgLog(fm, ...) PrtLog( (fm), __VA_ARGS__)
+#if defined __STDC_VERSION__ && __STDC_VERSION__ >= 199901L
+    #define DbgLog(...) PrtLog(__VA_ARGS__)
+#elif defined __GNUC__
+    #define DbgLog(fm, args...) PrtLog( (fm), ## args)
+#endif
+
 
 /************************************************************************
 **函数：PrtLog
@@ -54,6 +59,7 @@ int main(int argc, char *argv[])
 {
     PrtLog("something error!");
 
+    DbgLog("something error!");
     DbgLog("something error, errno = %d\n", 123);
 
     return 0;
