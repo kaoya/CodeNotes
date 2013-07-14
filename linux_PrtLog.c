@@ -13,7 +13,11 @@
 #include <time.h>
 #include <string.h>
 #include <stdarg.h>
-#include <unistd.h>
+//#include <unistd.h>
+
+
+// __VA_ARGS__用可变参数宏(variadic macros)传递可变参数表
+#define DbgLog(fm, ...) PrtLog( (fm), __VA_ARGS__)
 
 /************************************************************************
 **函数：PrtLog
@@ -49,6 +53,8 @@ void PrtLog(const char *format, ...)
 int main(int argc, char *argv[])
 {
     PrtLog("something error!");
+
+    DbgLog("something error, errno = %d\n", 123);
 
     return 0;
 }
