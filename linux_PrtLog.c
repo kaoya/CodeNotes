@@ -35,10 +35,8 @@ void PrtLog(const char *format, ...)
     
     va_list ap;
     va_start(ap, format);
-    vsprintf(buf, format, ap);
+    vsnprintf(buf, sizeof(buf), format, ap);
     va_end(ap);
-    
-    buf[sizeof(buf)-1] = 0x00;
     
     t = time(NULL);
     localtime_r(&t, &tmp);
