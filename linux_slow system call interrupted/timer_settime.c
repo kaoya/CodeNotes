@@ -35,7 +35,7 @@ int main()
     evp.sigev_notify          = SIGEV_THREAD;         // 线程通知的方式，派驻新线程
     evp.sigev_notify_function = timer_thread;         // 线程函数地址
 
-    if (timer_create(CLOCK_REALTIME, &evp, &timerid) == -1)
+    if (timer_create(CLOCK_MONOTONIC, &evp, &timerid) == -1)
     {
         perror("fail to timer_create");
         exit(-1);
