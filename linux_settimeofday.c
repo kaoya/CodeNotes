@@ -1,11 +1,11 @@
 /*********************************************************************
 *
-* ä½œè€…: KaoYa
+* ×÷Õß: KaoYa
 *
-* æ—¥æœŸ: 2018-2-7
+* ÈÕÆÚ: 2018-2-7
 *
-* æè¿°: linuxä¸‹è®¾ç½®ç³»ç»Ÿæ—¶é—´ï¼ˆä¸å—æ—¶åŒºå½±å“ï¼‰ï¼Œ
-*       å‡½æ•° strptime å’Œ mktime å†…éƒ¨å·²ç»æ ¹æ®æ—¶åŒºåšäº†è°ƒæ•´ï¼Œä¸éœ€è¦æˆ‘ä»¬æ“å¿ƒã€‚
+* ÃèÊö: linuxÏÂÉèÖÃÏµÍ³Ê±¼ä£¨²»ÊÜÊ±ÇøÓ°Ïì£©£¬
+*       º¯Êı strptime ºÍ mktime ÄÚ²¿ÒÑ¾­¸ù¾İÊ±Çø×öÁËµ÷Õû£¬²»ĞèÒªÎÒÃÇ²ÙĞÄ¡£
 *
 *********************************************************************/
 #define _XOPEN_SOURCE
@@ -20,16 +20,14 @@
 int main()
 {
     struct tm tm;
-    struct timeval tv;
 
-    // convert str to tm
     memset(&tm, 0, sizeof(struct tm));
-    strptime(TIME_STR, "%Y-%m-%d %H:%M:%S", &tm);
-
-    // set time
-    tv.tv_sec = mktime(&tm);
-    tv.tv_usec = 0;
-    settimeofday(&tv, NULL);
+    if (NULL != strptime(TIME_STR, "%Y-%m-%d %H:%M:%S", &tm)) {                 // convert str to tm
+        struct timeval tv;
+        tv.tv_sec = mktime(&tm);                                                // convert tm to sec
+        tv.tv_usec = 0;
+        settimeofday(&tv, NULL);                                                // set time
+    }
 
     return 0;
 }
