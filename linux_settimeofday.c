@@ -8,7 +8,8 @@
 *       函数 strptime 和 mktime 内部已经根据时区做了调整，不需要我们操心。
 *
 *********************************************************************/
-#define _XOPEN_SOURCE
+#define _XOPEN_SOURCE       // for strptime
+#define _BSD_SOURCE         // for settimeofday
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
